@@ -1,0 +1,46 @@
+#+title: 安装Fedora ＷＳＬ开发环境
+
+
+* Windows下安装Fedora 36
+
+1. 使用[[podman desktop]]安装支持SystemD的Fedora 36
+2. 使用Powershell, 执行`podman machine start`及`podman machine ssh`进入Fedora命令终端
+    #+begin_src bash
+
+     # 安装基本软件
+dnf group install "C Development Tools and Libraries" "Development Tools" "Python Science" "Robotics"
+dnf group install "KDE Plasma Workspaces" "LibreOffice" "Authoring and Publishing"
+dnf install dnf-plugins-core htop emacs code clang clang-analyzer git gcc ripgrep fd-find iputils iproute ibus-rime google-chrome-stable
+dnf install kde-i18n-Chinese kde-l10n-zh_CN langpacks-core-font-zh_CN langpacks-zh_CN opencc google-noto-sans-cjk-sc-fonts google-noto-sans-mono-cjk-sc-fonts google-noto-serif-sc-fonts
+
+# docker配置
+dnf install docker-ce docker-ce-cli
+sed -i 's@\(ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock\)$@\1 --iptables=false@' /usr/lib/systemd/system/docker.service
+systemctl enable --now docker
+
+# 配置郑码中文输入法
+echo -e "LANG=zh_CN.UTF-8\nLC_ALL=zh_CN.UTF-8\nLC_CTYPE=zh_CN.UTF-8" > /etc/locale.conf
+git clone https://github.com/Openvingen/rime-zhengma.git /tmp/rime-zhengma
+cp -r /tmp/rime-zhengma/{zmjd.*.yaml,pinyin123.*.yaml} /usr/share/rime-data
+sed -i -e '/zmjd/d' -e  '/schema_list:/a  - schema: zmjd' /usr/share/rime-data/default.yaml
+
+# 配置远程桌面
+sed -i 's@\(ExecStart=/usr/sbin/xrdp $XRDP_OPTIONS --nodaemon\)$@\1 -p 3390@' /usr/lib/systemd/system/xrdp.service
+/usr/lib/systemd/system/xrdp.service
+#+end_src
+3. 安装pandavpn
+4. 动态DNS配置
+
+* Windows访问Fedora 36远程桌面
+使用`远程桌面`访问`localhost:3390`即可登录WSL linux KDE桌面
+
+
+* Fedora docker制作
+
+#+begin_src docker
+FROM fedora
+
+run fedora_setup.sh
+
+CMD [ "/usr/sbin/init" ]
+#+end_src
