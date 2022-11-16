@@ -50,3 +50,10 @@ EOF
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 yum install code
 ```
+
+## Install Chinese fonts:
+
+```bash
+yum install google-noto-sans-simplified-chinese-fonts
+yum install google-noto-cjk-fonts google-noto-sans-cjk-fonts
+```
