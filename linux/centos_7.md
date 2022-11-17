@@ -12,7 +12,6 @@ yum update
 ## Install xrdp:
 
 ```bash
-
 yum group install "KDE Plasma Workspaces"
 yum install -y xrdp
 systemctl enable --now xrdp
@@ -20,6 +19,23 @@ systemctl enable --now xrdp
 firewall-cmd --add-port=3389/tcp --permanent
 firewall-cmd --reload
 ```
+xrdp support sound: [pulseaudio-module-xrdp](https://github.com/neutrinolabs/pulseaudio-module-xrdp/wiki/Build-on-Fedora)
+
+```bash
+dnf install mock
+usermod -a -G mock $USER
+# Log out and log in again
+dnf download --source pulseaudio
+mock ./pulseaudio-*.src.rpm
+
+yum remove pipewire-pulseaudio
+dnf install autoconf automake make libtool libtool-ltdl-devel pulseaudio-libs-devel git
+git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git
+cd pulseaudio-module-xrdp
+export PULSE_DIR=/var/lib/mock/fedora-36-x86_64/root/builddir/build/BUILD/pulseaudio-15.0
+./bootstrap && ./configure PULSE_DIR=$PULSE_DIR &&　make && make install
+```
+
 ## Install chrome browser:
 
 ```bash
