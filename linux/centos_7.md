@@ -71,3 +71,13 @@ yum install code
 yum install google-noto-sans-simplified-chinese-fonts
 yum install google-noto-cjk-fonts google-noto-sans-cjk-fonts
 ```
+
+## Install Podman & Docker container
+
+```bash
+yum-config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# podman
+dnf install podman
+```
