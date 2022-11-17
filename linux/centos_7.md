@@ -16,6 +16,9 @@ yum update
 yum group install "KDE Plasma Workspaces"
 yum install -y xrdp
 systemctl enable --now xrdp
+# If Firewalld is running, allow RDP port.
+firewall-cmd --add-port=3389/tcp --permanent
+firewall-cmd --reload
 ```
 ## Install chrome browser:
 
