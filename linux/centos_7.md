@@ -77,6 +77,7 @@ yum install google-noto-cjk-fonts google-noto-sans-cjk-fonts
 ```bash
 yum-config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+systemctl enable --now docker
 
 # podman
 dnf install podman
