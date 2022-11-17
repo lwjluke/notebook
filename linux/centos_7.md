@@ -1,3 +1,14 @@
+## Upgrade Fedora 34 to verison 36
+
+```bash
+dnf upgrade
+dnf --refresh upgrade
+dnf install dnf-plugin-system-upgrade --best
+dnf system-upgrade download --refresh --releasever=36
+dnf system-upgrade reboot
+yum update
+```
+
 ## Install xrdp:
 
 ```bash
