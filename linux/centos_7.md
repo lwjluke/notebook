@@ -12,7 +12,9 @@ yum update
 Network configure:
 
 ```bash
-sed -i 's@^#\?\(DNS=.*\)@DNS=10.83.50.140 8.8.8.8@g' /etc/systemd/resolved.conf
+# sed -i 's@^#\?\(DNS=.*\)@DNS=10.83.50.140 8.8.8.8@g' /etc/systemd/resolved.conf
+systemctl restart systemd-resolved
+rm -f /etc/resolv.conf; ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
 ## Install xrdp:
