@@ -9,6 +9,12 @@ dnf system-upgrade reboot
 yum update
 ```
 
+Network configure:
+
+```bash
+sed -i 's@^#\?\(DNS=.*\)@DNS=10.83.50.140 8.8.8.8@g' /etc/systemd/resolved.conf
+```
+
 ## Install xrdp:
 
 ```bash
