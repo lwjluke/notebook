@@ -111,3 +111,9 @@ systemctl enable --now docker
 # podman
 dnf install podman
 ```
+
+## Install tmux/zsh
+
+```bash
+yum install zsh tmux autojump
+```
