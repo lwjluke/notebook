@@ -49,3 +49,20 @@ FROM fedora
 run fedora_setup.sh
 CMD [ "/usr/sbin/init" ]
 #+end_src
+
+* Install rustdesk remote desktop:
+
+#+begin_src docker
+firewall-cmd --add-port=21115/tcp --permanent
+firewall-cmd --add-port=21116/tcp --permanent
+firewall-cmd --add-port=21117/tcp --permanent
+firewall-cmd --add-port=21118/tcp --permanent
+firewall-cmd --add-port=21119/tcp --permanent
+firewall-cmd --add-port=21116/udp --permanent
+firewall-cmd --reload
+mkdir -p workdir/tools/rustdesk
+docker run --name hbbr -p 21117:21117 -p 21119:21119 -v `pwd`/workdir/tools/rustdesk:/root -td --net=host rustdesk/rustdesk-server hbbr 
+docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v `pwd`/workdir/tools/rustdesk:/root -td --net=host rustdesk/rustdesk-server hbbs -r 52.69.24.174
+wget https://github.com/rustdesk/rustdesk/releases/download/1.1.9/rustdesk-1.1.9-fedora28-centos8.rpm
+yum install rustdesk-1.1.9-fedora28-centos8.rpm
+#+end_src
