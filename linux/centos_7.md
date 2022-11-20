@@ -45,7 +45,7 @@ export PULSE_DIR=/var/lib/mock/fedora-36-x86_64/root/builddir/build/BUILD/pulsea
 ```
 
 ```bash
-sudo yum install pulseaudio pulseaudio-qt kde-settings-pulseaudio pulseaudio-module-x11 alsa-plugins-pulseaudio
+sudo yum install pulseaudio pulseaudio-qt kde-settings-pulseaudio pulseaudio-module-x11 alsa-plugins-pulseaudio pavucontrol aprefs
 systemctl start --user pulseaudio
 ```
 
