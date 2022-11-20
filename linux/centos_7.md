@@ -44,6 +44,11 @@ export PULSE_DIR=/var/lib/mock/fedora-36-x86_64/root/builddir/build/BUILD/pulsea
 ./bootstrap && ./configure PULSE_DIR=$PULSE_DIR &&　make && make install
 ```
 
+```bash
+sudo yum install pulseaudio pulseaudio-qt kde-settings-pulseaudio pulseaudio-module-x11 alsa-plugins-pulseaudio
+systemctl start --user pulseaudio
+```
+
 ## Install chrome browser:
 
 ```bash
