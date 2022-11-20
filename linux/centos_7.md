@@ -37,16 +37,29 @@ dnf download --source pulseaudio
 mock ./pulseaudio-*.src.rpm
 
 yum remove pipewire-pulseaudio
-dnf install autoconf automake make libtool libtool-ltdl-devel pulseaudio-libs-devel git
+yum install autoconf automake make libtool libtool-ltdl-devel pulseaudio-libs-devel git
 git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git
 cd pulseaudio-module-xrdp
 export PULSE_DIR=/var/lib/mock/fedora-36-x86_64/root/builddir/build/BUILD/pulseaudio-15.0
 ./bootstrap && ./configure PULSE_DIR=$PULSE_DIR &&　make && make install
+ls $(pkg-config --variable=modlibexecdir libpulse) | grep xrdp
+#If you can see module-xrdp-sink.so and module-xrdp-source.so, PulseAudio modules are properly built and installed.
+
+yum install paman pamix paprefs pasystray pavucontrol
+# Setting pulaeaudio as default audio device:
+# Open application "PulseAudio Preferences/Simultaneous Output/Add virtual output device for simultaneous ouput on all local sound cards"
 ```
+migrate pulseaudio-xrdp to other Fedora:
 
 ```bash
-sudo yum install pulseaudio pulseaudio-qt kde-settings-pulseaudio pulseaudio-module-x11 alsa-plugins-pulseaudio pavucontrol aprefs
-systemctl start --user pulseaudio
+tar jcvf pulseaudio.tar.bz /var/lib/mock/fedora-36-x86_64/root/builddir/build/BUILD/pulseaudio-15.0 /var/lib/mock/pulseaudio-module-xrdp
+cd / && tar jxvf pulseaudio.tar.bz && /var/lib/mock/pulseaudio-module-xrdp && make install
+ls $(pkg-config --variable=modlibexecdir libpulse) | grep xrdp
+#If you can see module-xrdp-sink.so and module-xrdp-source.so, PulseAudio modules are properly built and installed.
+
+yum install paman pamix paprefs pasystray pavucontrol
+# Setting pulaeaudio as default audio device:
+# Open application "PulseAudio Preferences/Simultaneous Output/Add virtual output device for simultaneous ouput on all local sound cards"
 ```
 
 ## Install chrome browser:
