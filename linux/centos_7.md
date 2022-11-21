@@ -116,7 +116,7 @@ yum install google-noto-cjk-fonts google-noto-sans-cjk-fonts
 yum install ibus-rime
 git clone https://github.com/Openvingen/rime-zhengma.git
 cp rime-zhengma/{zhengma,zmbig,zmb,zmjd,pinyin123}.*.yaml  /usr/share/rime-data
-sed -i -e  '/schema_list:/a  - schema: zhengma' /usr/share/rime-data/default.yaml
+sed -i -e  '/schema_list:/a\ \ - schema: zhengma' /usr/share/rime-data/default.yam
 
 cat << EOF > /etc/locale.conf
 LANG=zh_CN.UTF-8
