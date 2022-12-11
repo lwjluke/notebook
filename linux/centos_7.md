@@ -144,3 +144,20 @@ mkdir -p /sys/fs/cgroup/systemd && mount -t cgroup -o none,name=systemd cgroup /
 ```bash
 yum install zsh tmux autojump
 ```
+
+## Set ssh tunnel server
+
+```bash
+# On public IP server: 52.1.1.1
+adduser -s /sbin/nologin temp
+yes '1J$yZqk{8kgMxbw' | passwd temp
+sed -i 's/.*GatewayPorts.*/GatewayPorts yes/' /etc/ssh/sshd_config
+systemctl restart sshd
+
+# On private server: target is 10.216.29.41:22
+ssh -p 8822 -NR 0.0.0.0:9922:10.216.29.41:22 temp@52.1.1.1
+# now 52.1.1.1:9922 is same 10.216.29.41:22
+
+# On other client
+ssh -p 9922 <10.216.29.41 user>@52.1.1.1
+```
