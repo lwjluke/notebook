@@ -13,6 +13,30 @@
 
 ## 原理
 
+### 本地转发(解决本地其它主机不能访问外网主机的问题，将外网应用映射到本地端口)
+
+当本地机器不能直接访问RemoteOtherIP:RemoteOtherPort时，通过LocalHost <=> sshServer建立ssh tunnel间接访问：
+
+**本地其它LocalOther** => **LocalHost:LocalNewListenPort** => 本地转发 => RemoteSshServer) => **RemoteOtherIP:RemoteOtherPort**
+
+```
+# 在LocalHost上执行，本地作为中转机，本机也为服务接入机（即转发端口侦听机）
+ssh -g -N -f -L LocalNewListenPort:通过sshServer能访问的RemoteIP:通过RemoteSshServer能访问的RemotePort user@RemoteSshSever
+```
+
+### 远端转发(解决外网其它主机不能访问私网主机的问题，将内同应用映付到公网端口)
+
+当远端机器不能直接访问LocalOtherIP:LocalOtherPort时，通过RemoteSshServer <=> LocalHost建立ssh tunnel间接访问：
+
+**远程其它RemoteOther** => **RemoteSshSever:RemoteNewListenPort** => RemoteSshServer => 本地转发 => **LocalOtherIP:LocalOtherPort**
+
+```
+# 在LocalHost上执行，本机作为中转机，远程机作为服务接入机（即转发端口侦听机）
+ssh -g -N -f -R RemoteNewListenPort:通过LocalHost能访问的LocalOtherIP:通过LocalHost能访问的LocalOtherPort user@RemoteSshSever
+```
+
+注意：要允许RemoteNewListenPort绑定在非环回地址上，需要在RemoteSshSever的sshd配置文件中启用"GatewayPorts"选项
+
 ## 实操
 
 ### Local本地转发(导入应用)
@@ -60,3 +84,4 @@ ssh -R 922:10.216.29.19:22 root@43.23.1.13
 ## 参考文档
 
 - [SSH隧道简明教程](https://www.lixueduan.com/posts/linux/07-ssh-tunnel/)
+- [SSH隧道：端口转发功能详解](https://www.cnblogs.com/f-ck-need-u/p/10482832.html)
