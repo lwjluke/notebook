@@ -33,6 +33,10 @@ ssh -g -N -f -L LocalNewListenPort:通过sshServer能访问的RemoteIP:通过Rem
 ```
 # 在LocalHost上执行，本机作为中转机，远程机作为服务接入机（即转发端口侦听机）
 ssh -g -N -f -R RemoteNewListenPort:通过LocalHost能访问的LocalOtherIP:通过LocalHost能访问的LocalOtherPort user@RemoteSshSever
+# 使用ssh登录到RemoteServer上查看RemoteNewListenPort状态
+netstat -tunlp|grep $RemoteNewListenPort && lsof -i :$RemoteNewListenPort
+# 实际示例：将本机ssh服务分享到外网，然后可以通过命令：ssh -p 10022 localUser@20.236.71.98 访问本机sshq服务
+ssh -g -N -f -R 10022:localhost:22 root@20.236.71.98
 ```
 
 注意：要允许RemoteNewListenPort绑定在非环回地址上，需要在RemoteSshSever的sshd配置文件中启用"GatewayPorts"选项
