@@ -23,10 +23,17 @@
 
 其中的应用之一是科学上网。
 
+通用命令：本机上的 forwardingPort 将会被监听，访问本机的 forwardingPort，就相当于访问 targetIP 的 targetPort，ssh隧道建立在本机与 sshServer 之间。
+
+```
+ssh -f -N -g -L LocalPort:targetIP:targetPort user@sshServerIP
+telnet MyIP:LocalPort #=>sshServerIP=> targetIP:targetPort
+```
+
 实例：将43.23.1.13:8822转换成127.0.0.1:822，所以内部主机访问127.0.0.1:822即访问远程43.23.1.13:8822。
 
 ```
-ssh -L 8822:127.0.0.1:822 root@43.23.1.13
+ssh -f -N -g -L 8822:127.0.0.1:822 root@43.23.1.13
 ```
 
 ### Remote远程转发(导出应用)
@@ -36,6 +43,13 @@ ssh -L 8822:127.0.0.1:822 root@43.23.1.13
 远程中转主机建立隧道并实现转发，通过建立端口2的侦听端口，将远程其它主机访问端口2的流量转换成内部主机的端口1。
 
 其中的应用之一是将内网中的服务器提供给外网访问。
+
+通用命令：sshServer 上的 forwardingPort 将会被监听，访问 sshServer 上的 forwardingPort，就相当于访问 targetIP 的 targetPort，ssh 隧道建立在本机与 sshServer 之间。
+
+```
+ssh -N -R serverPort:targetIP:targetPort user@sshServerIP
+telnet sshServerIP:serverPort #=LocalHost=> targetIP:targetPort
+```
 
 实例：将10.216.29.19:22转换成43.23.1.13:922，所以远程主机访问43.23.1.13:922即访问内部10.216.29.19:22。
 
