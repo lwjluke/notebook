@@ -1,7 +1,7 @@
 
 # Win10/WSL2.0打造Linux环境
 
-## 1. WSL2 setup on Windows 11
+## WSL2 setup on Windows 11
 
 - 以管理员权限打开Windows Powershell：
 ```
@@ -20,7 +20,7 @@ wsl -t OracleLinux_8_7
 wsl # 重启Linux进入systemd模式
 ```
 
-## 2. [编译升级WSL2 linux内核](https://nxdong.com/wsl-update-kernel/)
+## [编译升级WSL2 linux内核](https://nxdong.com/wsl-update-kernel/)
 
 - 编译WSL2内核，然后重启计算机
 ```
@@ -75,7 +75,7 @@ uname -a # 显示WSL当前内核为：Linux Luke 5.15.0-106.131.4.el8uek.x86_64.
 zpool status # 显示：no pools available
 ```
 
-## 3. WSL2 支持物理磁盘
+## WSL2 支持物理磁盘
 
 - 使用管理员权限打开Powershell，用以下命令列出物理磁盘
 
@@ -94,7 +94,19 @@ wsl --unmount \\.\PHYSICALDRIVE1
 wsl --unmount \\.\PHYSICALDRIVE2 # 使用完毕完后卸载磁盘
 ```
 
-## 4. Upgrade Oracle Linux 8 to 9
+## WSL2 使用虚拟硬盘作为ZFS数据盘
+
+1、按 Win + R 组合键，打开运行，在运行窗口中输入：compmgmt.msc 命令，打开磁盘管理器；
+
+2、打开磁盘管理，右键点击”磁盘管理“，选择”创建VHD“，位置选择D盘，虚拟硬盘格式选择”VHDX“，其他自己设置，然后点”确定“；
+
+4、打开PowerShell，输入wmic diskdrive list brief，找到刚才创建的”Microsoft 虚拟磁盘“的DeviceID，我的是”\\.\PHYSICALDRIVE1“；
+
+5、在管理员权限的PowerShell中，输入wsl --mount \\.\PHYSICALDRIVE1 --bare；
+
+6、进入wsl，输入"zpool create zfs /dev/sdc" 创建ZFS文件系统
+
+## Upgrade Oracle Linux 8 to 9
 
 ```
 grub2-mkconfig -o /boot/grub2/grub.cfg
