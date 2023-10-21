@@ -118,13 +118,13 @@ leapp upgrade --oraclelinux
 
 安装 code server
 ```
-[root@Luke ~]# su -
-[root@Luke ~]# yum install -y https://github.com/coder/code-server/releases/download/v4.17.1/code-server-4.17.1-amd64.rpm
-cat /root/.config/code-server/config.yaml
+[root@Luke ~]# sudo yum install -y https://github.com/coder/code-server/releases/download/v4.17.1/code-server-4.17.1-amd64.rpm
+[root@Luke ~]# cat ~/.config/code-server/config.yaml
 bind-addr: 0.0.0.0:8080
 auth: passwor[root@Luke ~]# d
 password: simon
 cert: false
+
 [root@Luke ~]# /usr/lib/systemd/system/code-server.service
 [Unit]
 Description=code-server
@@ -138,5 +138,9 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+
+[root@Luke ~]# sudo systemctl enable --now code-server@$USER
 ```
-写入配置文件：
+
+参考文档：
+- [code-server搭建指南](https://zhuanlan.zhihu.com/p/539902333)
