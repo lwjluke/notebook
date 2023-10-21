@@ -151,6 +151,7 @@ WantedBy=multi-user.target
 - Mermaid Markdown Syntax Highlighting
 - Markdown PDF
 - vscode-pandoc # yum install pandoc texlive
+- plantuml # yum install plantuml
 - org mode
 - Draw.io Integration
 - GitLens
