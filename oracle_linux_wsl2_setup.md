@@ -83,6 +83,24 @@ zpool status # 显示：no pools available
 wmic diskdrive list brief # 显示：\\.\PHYSICALDRIVE0，\\.\PHYSICALDRIVE2
 ```
 
+- 创建一个虚拟磁盘
+
+创建 `d:\aws-linux\load-vhd-disk.diskpart`：
+```
+select vdisk file="d:\aws-linux\wsl-disk-20g.vhd"
+attach vdisk
+```
+
+创建自动加载虚拟磁盘加载脚本`d:\aws-linux\attach-and-mount-vhd-disk.bat`：
+```
+diskpart /s "d:\aws-linux\load-vhd-disk.diskpart"
+wsl --mount \\.\PHYSICALDRIVE1 --bare
+wsl -u root zpool import zfs
+```
+
+在 windows 上拷贝 `d:\aws-linux\attach-and-mount-vhd-disk.bat`到`C:\Users\Luwenjiang\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+
+
 - 将物理盘1及物理盘2传入WSL2管理
 
 ```
