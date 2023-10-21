@@ -142,5 +142,29 @@ WantedBy=multi-user.target
 [root@Luke ~]# sudo systemctl enable --now code-server@$USER
 ```
 
+安装code-server插件
+- Vim
+- Office Viewer(Markdown Editor) # dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm; yum install chromium
+- Markdown All in One
+- mardownlint
+- Markdown Preview Mermaid Support
+- Mermaid Markdown Syntax Highlighting
+- Markdown PDF
+- vscode-pandoc # yum install pandoc texlive
+- org mode
+- Draw.io Integration
+- GitLens
+- clangd # yum install clang clang-format 
+- clangd web
+- clang-forman
+- clang-tidy
+- C/C++ Clang Command Adapter
+- Bash IDE
+- Bash Debug
+- Bash Extension Pack
+- Go
+- Rust
+- rust-analyzer
+
 参考文档：
 - [code-server搭建指南](https://zhuanlan.zhihu.com/p/539902333)
