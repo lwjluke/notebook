@@ -149,7 +149,6 @@ WantedBy=multi-user.target
 - mardownlint
 - Markdown Preview Mermaid Support
 - Mermaid Markdown Syntax Highlighting
-- Markdown PDF
 - vscode-pandoc # yum install pandoc texlive
 - plantuml # yum install plantuml
 - org mode
