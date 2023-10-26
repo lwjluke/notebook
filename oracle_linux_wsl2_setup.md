@@ -168,6 +168,7 @@ WantedBy=multi-user.target
 - Markdown Preview Mermaid Support
 - Mermaid Markdown Syntax Highlighting
 - vscode-pandoc # yum install pandoc texlive
+- Dendron # Knowledge Management base vs-code
 - plantuml # yum install plantuml
 - org mode
 - Draw.io Integration
