@@ -161,6 +161,7 @@ WantedBy=multi-user.target
 ```
 
 安装code-server插件
+```
 - Vim
 - Office Viewer(Markdown Editor) # dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm; yum install chromium
 - Markdown All in One
@@ -184,6 +185,7 @@ WantedBy=multi-user.target
 - Go
 - Rust
 - rust-analyzer
+```
 
 参考文档：
 - [code-server搭建指南](https://zhuanlan.zhihu.com/p/539902333)
