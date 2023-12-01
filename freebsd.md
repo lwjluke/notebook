@@ -15,3 +15,20 @@ sysrc sddm_enable="YES" && service sddm start
 ```
 adduser 
 ```
+
+## Ports
+
+- 安装podman
+
+```
+pkg install portsnap ports-tools portsdb portscout portsearch
+
+portsnap fetch
+portsnap extract
+portsnap update
+
+cd /usr/ports/sysutils/podman
+make install clean
+
+```
+
