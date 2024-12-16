@@ -1,6 +1,7 @@
 
 * 参考资料
-1. [[https://blog.kaaass.net/archives/1659][复式记账指北]]
-2. [[https://github.com/zhzy0077/hledger-accounting/blob/main/README.md][端到端的记账解决方案]]
-3. [[https://zhuanlan.zhihu.com/p/158628437][复式记账工具:hledger]]
-4. [[https://geekdaxue.co/read/Beancount-User-Manual-CN/Beancount-guide.md][Beancount 中文用户手册]]
+- [[https://blog.kaaass.net/archives/1659][复式记账指北]]
+- [[https://tengl.ca/blog/2019/5/23/double-entry-accounting-with-ledger-cli][Ledger CLI]]
+- [[https://github.com/zhzy0077/hledger-accounting/blob/main/README.md][端到端的记账解决方案]]
+- [[https://zhuanlan.zhihu.com/p/158628437][复式记账工具:hledger]]
+- [[https://geekdaxue.co/read/Beancount-User-Manual-CN/Beancount-guide.md][Beancount 中文用户手册]]
