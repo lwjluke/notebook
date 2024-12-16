@@ -1,6 +1,5 @@
-# 
 
-
-# 参考资料
-1. https://blog.kaaass.net/archives/1659: 复式记账指北（一）
-2. 
+* 参考资料
+1. [[https://blog.kaaass.net/archives/1659][复式记账指北]]
+2. [[https://github.com/zhzy0077/hledger-accounting/blob/main/README.md][端到端的记账解决方案]]
+3. [[https://zhuanlan.zhihu.com/p/158628437][复式记账工具:hledger]]
